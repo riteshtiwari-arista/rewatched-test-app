@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+
+  <!-- Kestra Analytics SDK -->
+  <script>
+    console.log('[Kestra Snippet] Starting...');
+    !function(){window.__kestraQ__=window.__kestraQ__||[];window.kestra=window.kestra||{push:function(t){window.__kestraQ__.push(t)}};if(window.kestra.init)return void window.kestra.init.apply(window.kestra,arguments);var e=document.createElement("script");e.async=!0,e.src="https://cdn.rewatched.io/sdk/v1/kestra.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n);console.log('[Kestra Snippet] Created temp queue, script tag injected')}();
+    console.log('[Kestra Snippet] Calling push with init...');
+    kestra.push(['init', 'test_d3485a809efdf3427a37bd5d3980c003', {
+      apiUrl: 'https://rewatched.io',
+      sessionRecording: {
+        enabled: true,
+        privacy: {
+          maskAllInputs: true
+        },
+        upload: {
+          flushInterval: 30000
+        }
+      }
+    }]);
+    console.log('[Kestra Snippet] After push, temp queue:', window.__kestraQ__);
+
+    // Designer mode detection - stores params before app navigation
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var token = params.get('token');
+      var appId = params.get('app_id');
+      var apiUrl = params.get('api_url');
+      var isDesigner = params.get('kestra_designer') === 'true';
+
+      // Store designer intent in sessionStorage (survives redirects)
+      if (isDesigner && token && appId && apiUrl) {
+        sessionStorage.setItem('kestra_designer_token', token);
+        sessionStorage.setItem('kestra_designer_appId', appId);
+        sessionStorage.setItem('kestra_designer_apiUrl', apiUrl);
+        sessionStorage.setItem('kestra_designer_active', 'true');
+      }
+    })();
+  </script>
+</body>
+</html>
