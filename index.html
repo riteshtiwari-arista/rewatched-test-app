@@ -15,10 +15,27 @@
   <!-- Kestra Analytics SDK -->
   <script>
     console.log('[Kestra Snippet] Starting...');
-    !function(){window.__kestraQ__=window.__kestraQ__||[];window.kestra=window.kestra||{push:function(t){window.__kestraQ__.push(t)}};if(window.kestra.init)return void window.kestra.init.apply(window.kestra,arguments);var e=document.createElement("script");e.async=!0,e.src="https://cdn.rewatched.io/sdk/v1/kestra.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n);console.log('[Kestra Snippet] Created temp queue, script tag injected')}();
+    !function(){
+      window.__kestraQ__=window.__kestraQ__||[];
+      window.kestra=window.kestra||{push:function(t){window.__kestraQ__.push(t)}};
+      if(window.kestra.init)return void window.kestra.init.apply(window.kestra,arguments);
+      var e=document.createElement("script");
+      e.async=!0;
+      // Auto-detect environment: localhost vs production
+      e.src = window.location.hostname === 'localhost'
+        ? "http://localhost:3000/sdk/rewatched.min.js"
+        : "https://rewatched.io/sdk/rewatched.min.js";
+      var n=document.getElementsByTagName("script")[0];
+      n.parentNode.insertBefore(e,n);
+      console.log('[Kestra Snippet] Created temp queue, script tag injected, SDK URL:', e.src);
+    }();
     console.log('[Kestra Snippet] Calling push with init...');
+    // Auto-detect API URL based on environment
+    var apiUrl = window.location.hostname === 'localhost'
+      ? 'http://localhost:3000'
+      : 'https://rewatched.io';
     kestra.push(['init', 'test_d3485a809efdf3427a37bd5d3980c003', {
-      apiUrl: 'https://rewatched.io',
+      apiUrl: apiUrl,
       sessionRecording: {
         enabled: true,
         privacy: {
@@ -29,7 +46,7 @@
         }
       }
     }]);
-    console.log('[Kestra Snippet] After push, temp queue:', window.__kestraQ__);
+    console.log('[Kestra Snippet] After push, API URL:', apiUrl, 'temp queue:', window.__kestraQ__);
 
     // Designer mode detection - stores params before app navigation
     (function() {
